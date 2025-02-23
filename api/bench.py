@@ -25,17 +25,15 @@ questions = [
 ]
 
 # 测试的次数
-loop = 2
+loop = 3
 
 model_name = "deepseek-r1:1.5b"
 
 # vllm 和 ollama 都兼容了 openai 的 api 让测试变得更简单了
 url = 'http://localhost:11434/v1/chat/completions'
 
-max_concurrent_requests_list = [1, 2]
-
-
-# max_concurrent_requests_list = [1, 2, 4, 8, 14, 16, 18, 20]
+# max_concurrent_requests_list = [1, 2]
+max_concurrent_requests_list = [1, 2, 4, 8, 14, 16, 18, 20]
 
 
 async def fetch(session, url):
@@ -121,7 +119,7 @@ async def run(load_url, max_concurrent_requests, total_requests):
 # model warm up
 def warm_up():
     print('Warming up the model...')
-    completion_tokens, response_times = asyncio.run(run(url, 1, 2))
+    asyncio.run(run(url, 1, 2))
     print('\nModel is warmed up and ready to go!')
 
 
